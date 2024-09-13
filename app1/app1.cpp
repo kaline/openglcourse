@@ -7,15 +7,29 @@
 int main()
 {
 
+    GLFWwindow* window;
 
     if (!glfwInit()) {
         std::cout << "Error";
         exit(-1);
     }
-    std::cout << "Hello World!\n";
-    char c;
-    std::cin >> c;
-    return 0;
+
+    window = glfwCreateWindow(800, 600, "hello", 0, 0);
+    if (!window) {
+        std::cout << "Window creation error";
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+
+    while (!glfwWindowShouldClose(window)) {
+        glClearColor(1.0, 0.0, 0.0, 0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+    glfwTerminate();
+   
 }
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
